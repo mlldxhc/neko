@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>登录页面</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet">
+    <!--external css-->
+    <link th:href="@{/assets/font-awesome/css/font-awesome.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/style-responsive.css}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    [endif]-->
+</head>
+
+<body>
+
+<!-- **********************************************************************************************************************************************************
+MAIN CONTENT
+*********************************************************************************************************************************************************** -->
+
+<div id="login-page">
+    <div class="container">
+
+        <form class="form-login" th:action="@{/user/login}" method="post">
+            <h2 class="form-login-heading" th:text="#{login.tip}">请登录</h2>
+			<p style="color: red;text-align: center" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+            <div class="login-wrap">
+                <input type="text" name="username" class="form-control" th:placeholder="#{login.username}" autofocus>
+                <br>
+                <input type="password" name="password" class="form-control" th:placeholder="#{login.password}">
+                <label class="checkbox">
+		                <span class="pull-right">
+		                    <a data-toggle="modal" th:href="@{/login.html#myModal}"
+                               th:text="#{login.forget}"> Forgot Password?</a>
+		
+		                </span>
+                </label>
+                <button class="btn btn-theme btn-block" th:href="@{/}" type="submit" th:text="#{login.login}"><i
+                        class="fa fa-lock"></i> SIGN IN
+                </button>
+                <hr>
+
+                <div class="login-social-link centered">
+                    <p th:text="#{login.ways}">or you can sign in via your social network</p>
+                    <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
+                    <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
+                </div>
+                <div class="registration">
+                    &nbsp;&nbsp;<span th:text="#{login.nothave}">Don't have an account yet?</span><br>
+                    <a class="" th:href="@{/}">
+                        <span th:text="#{login.account}">Create an account</span>
+                    </a>
+                </div>
+                <div style="text-align: center">
+                    &emsp;&nbsp;<a th:href="@{/index.html(l='zh_CN')}">中文</a>
+                    <span>&nbsp;|&nbsp;</span>
+                    <a th:href="@{/index.html(l='en_US')}">English</a>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal"
+                 class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" th:text="#{login.forget}">Forgot Password ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p th:text="#{login.find}">Enter your e-mail address below to reset your password.</p>
+                            <input type="text" name="email" th:placeholder="#{login.email}" autocomplete="off"
+                                   class="form-control placeholder-no-fix">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button"
+                                    th:text="#{login.quxiao}">Cancel
+                            </button>
+                            <button class="btn btn-theme" type="button" th:text="#{login.queding}">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+
+        </form>
+
+    </div>
+</div>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script th:src="@{/assets/js/jquery.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+
+<!--BACKSTRETCH-->
+<!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+<script type="text/javascript" th:src="@{/assets/js/jquery.backstretch.min.js}"></script>
+<script th:inline="javascript">
+    $.backstretch( [[@{/assets/img/login-bg.jpg}]], {speed: 500});
+</script>
+
+
+</body>
+</html>

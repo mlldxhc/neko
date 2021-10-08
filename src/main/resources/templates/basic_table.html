@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>用户管理</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet">
+    <!--external css-->
+    <link th:href="@{/assets/font-awesome/css/font-awesome.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/style-responsive.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<section id="container">
+    <!-- **********************************************************************************************************************************************************
+    TOP BAR CONTENT & NOTIFICATIONS
+    *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <div th:replace="~{index.html :: header}"></div>
+    <!--header end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+    *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <div th:replace="~{index.html :: menu(active = 'table')}"></div>
+    <!--sidebar end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> 数据表</h3>
+            <div class="row">
+                <div class="col-md-12 mt">
+                    <div class="content-panel">
+                        <table class="table table-hover">
+                            <h4><i class="fa fa-angle-right"></i> 所有用户</h4>
+                            <thead>
+                            <tr>
+                                <th class="col-sm-1">编号</th>
+                                <th class="col-sm-1">姓名</th>
+                                <th class="col-sm-1">电话</th>
+                                <th class="col-sm-1">用户名</th>
+                                <th class="col-sm-1">密码</th>
+                                <th class="col-sm-1">领养个数</th>
+                                <th class="col-sm-1">权限</th>
+                                <th class="col-sm-1">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="table">
+                            </tbody>
+                        </table>
+                        <div>
+                            <span id="totalPage"></span>
+                            <span id="page" th:text="${page}"></span>
+                            <a id="up" class='btn btn-sm btn-primary' hidden onclick="pagedown()">上一页</a>
+                            <a id="down" class='btn btn-sm btn-primary' onclick="pageup()">下一页</a>
+                            <script type="text/javascript" th:inline="javascript">
+                                let page = [[${page}]];
+                                let totalPage = [[${totalPage}]];
+
+                                function deleteOr() {
+                                    return confirm("是否删除");
+                                }
+                                function pageup() {
+                                    page += 1;
+                                    tableAjax(page, totalPage, [[@{/}]]);
+                                }
+                                function pagedown() {
+                                    page -= 1;
+                                    tableAjax(page, totalPage, [[@{/}]]);
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- --/wrapper ---->
+    </section><!-- /MAIN CONTENT -->
+
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+        <div class="text-center">
+            2014 - Alvarez.is <a th:href="@{/http://www.mycodes.net/}" target="_blank">源码之家</a>
+            <a th:href="@{/basic_table.html}" class="go-top">
+                <i class="fa fa-angle-up"></i>
+            </a>
+        </div>
+    </footer>
+    <!--footer end-->
+</section>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script th:src="@{/assets/js/jquery.js}"></script>
+<script th:src="@{/js/ajax.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    tableAjax(page, totalPage, [[@{/}]]);
+</script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script class="include" type="text/javascript" th:src="@{/assets/js/jquery.dcjqaccordion.2.7.js}"></script>
+<script th:src="@{/assets/js/jquery.scrollTo.min.js}"></script>
+<script th:src="@{/assets/js/jquery.nicescroll.js}" type="text/javascript"></script>
+
+<script th:src="@{/assets/js/common-scripts.js}"></script>
+
+<!--script for this page-->
+
+<!--<script>
+    //custom select box
+
+    $(function () {
+        $('select.styled').customSelect();
+    });
+
+</script>-->
+
+</body>
+</html>

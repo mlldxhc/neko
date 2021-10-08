@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.CatMapper">
+
+    <select id="queryCat" resultType="Cat">
+        select *
+        from cat
+        limit #{count},5;
+    </select>
+
+    <select id="catCount" resultType="int">
+        select count(1)
+        from cat;
+    </select>
+    <select id="queryUsername" resultType="String">
+        select cat.username
+        from cat;
+    </select>
+
+    <select id="queryByUsername" resultType="Cat">
+        select *
+        from cat
+        where username = #{username};
+    </select>
+
+    <select id="canAdopt" parameterType="int" resultType="Cat">
+        select *
+        from cat
+        where username IS NULL
+           or username = ''
+        limit #{count},5;
+    </select>
+
+    <select id="canAdoptCount" resultType="int">
+        select count(1)
+        from cat
+        where username IS NULL
+           or username = '';
+    </select>
+
+    <select id="userCatCount" parameterType="string" resultType="int">
+        select count(1)
+        from cat
+        where username = #{username};
+    </select>
+
+    <select id="queryByID" resultType="Cat">
+        select *
+        from cat
+        where id = #{id};
+    </select>
+
+    <insert id="addCat" parameterType="Cat">
+        insert into cat (id, area, username, adoptDate)
+        values (#{id}, #{area}, #{username}, #{adoptDate});
+    </insert>
+
+    <update id="updateCat" parameterType="Cat">
+        update cat
+        set area      = #{area},
+            username  = #{username},
+            adoptDate = #{adoptDate}
+        where id = #{id};
+    </update>
+
+    <delete id="deleteCat">
+        delete
+        from cat
+        where id = #{id}
+    </delete>
+
+</mapper>

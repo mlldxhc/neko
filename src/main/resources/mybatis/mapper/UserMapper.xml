@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.UserMapper">
+
+    <select id="queryUser" resultType="User">
+        select *
+        from user
+        order by id
+        limit #{count},5;
+    </select>
+    <select id="queryUserAll" resultType="User">
+        select *
+        from user
+    </select>
+
+    <select id="queryUserByName" resultType="User">
+        select *
+        from user
+        where username = #{name};
+    </select>
+
+    <select id="userCount" resultType="int">
+        select count(1)
+        from user;
+    </select>
+
+    <select id="queryByID" resultType="User">
+        select *
+        from user
+        where id = #{id};
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        insert into user (username, password, name, phone, cats,perms)
+        values (#{username}, #{password}, #{name}, #{phone}, #{cats}, #{perms});
+    </insert>
+    <update id="updateUser">
+        update user
+        set username = #{username},
+            password = #{password},
+            name     = #{name},
+            phone    = #{phone},
+            cats    = #{cats},
+            perms    = #{perms}
+        where id = #{id};
+    </update>
+
+    <delete id="deleteUser">
+        delete
+        from user
+        where id = #{id}
+    </delete>
+
+</mapper>
